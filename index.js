@@ -1,18 +1,24 @@
 // Add your functions here
-function map(Array){
+function map(obj, cb) {
+  const arr = []
+  for (const key in obj) {
+    arr.push(cb(obj[key]))
+  }
+  return arr
+}
 
-  function map1(Array){
-      return Array.map(x => x * 2);
+function reduce(obj, cb, accumulator) {
+  const keys = Object.keys(obj)
+  let i = 1
+
+  if (accumulator) {
+    i = 0
+  } else {
+    accumulator = obj[keys[0]]
   }
 
-  function map2(Array){
-      return Array.map(x => x * x);
+  for (i; i < keys.length; i++) {
+    accumulator = cb(accumulator, obj[keys[i]])
   }
-
-  function map3(Array){
-      return Array.map(x => x * x);
-  }
-
-
-return [map1(),map2(),map3()];
+  return accumulator
 }
